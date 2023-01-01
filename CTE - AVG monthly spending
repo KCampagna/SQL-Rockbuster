@@ -1,0 +1,14 @@
+--Query with CTE finding average monthly expenditure per customer for the month of March, 2007
+
+WITH monthly_customer_payment_CTE AS 
+	(SELECT customer_id,
+	SUM(amount) total_paid_monthly
+FROM payment
+
+WHERE payment_date between '2007-03-01' AND '2007-03-31'
+
+GROUP BY customer_id)
+
+SELECT 
+	AVG(total_paid_monthly) AS avg_monthly_customer_payment
+FROM monthly_customer_payment_cte
